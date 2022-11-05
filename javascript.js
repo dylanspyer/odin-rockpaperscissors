@@ -78,13 +78,19 @@ function wrongSelection(playerSelection) {
 // When either player or computer reaches 5 consecutive wins
 // Prompt "game over. try again."
 function game() {
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= Infinity; i++) {
     playerSelection = prompt("Rock, paper, scissors, shoot!").toLowerCase();
-    console.log(`You choose ${playerSelection}`);
     computerSelection = getComputerChoice();
+    console.log(`You choose ${playerSelection}`);
     console.log(`Computer chooses ${computerSelection}`);
     console.log(playRound(playerSelection, computerSelection));
     console.log(`The score is ${playerScore} to ${computerScore}`);
+    if (playerScore == 5) {
+      return console.log("you won the series");
+    }
+    if (computerScore == 5) {
+      return console.log("you lost the series");
+    }
   }
 }
 
