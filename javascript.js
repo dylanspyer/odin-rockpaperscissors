@@ -1,5 +1,5 @@
 // Computer randomly selects one of the three choices
-const gameChoices = ["Rock", "Paper", "Scissors"];
+const gameChoices = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * gameChoices.length);
@@ -11,14 +11,13 @@ function getComputerChoice() {
 // Prompt asks user to choose rock, paper, or scissors
 // If typing, throw error to user if they do not input one of the choices, not case sensitive
 
-const playerSelectionPrompt = prompt("Rock, paper, scissors");
-const playerSelection = playerSelectionPrompt.toLowerCase();
-const computerSelection = getComputerChoice().toLowerCase();
+// const playerSelectionPrompt = prompt("Rock, paper, scissors");
+// const playerSelection = playerSelectionPrompt.toLowerCase();
+
+// const computerSelection = getComputerChoice();
+// const playerSelection = prompt("Rock, paper, scissors, shoot").toLowerCase();
 
 // If player types something else, throw an error
-function wrongSelection(playerSelection) {
-  if ((playerSelection != "rock", "paper", "scissors")) return "try again";
-}
 
 // Results are determined as follows:
 
@@ -33,30 +32,43 @@ function wrongSelection(playerSelection) {
 // if player chooses scissors and computer chooses scissors, tie
 // if player chooses scissors and computer chooses rock, lose
 // if player chooses scissors and computer chooses paper, win
+let playerScore = 0;
+let computerScore = 0;
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == "rock" && computerSelection == "paper") {
-    return "You lose";
+    ++computerScore;
+    console.log("You lose");
   } else if (playerSelection == "rock" && computerSelection == "scissors") {
-    return "You win";
+    console.log("You win");
+    ++playerScore;
   } else if (playerSelection == "scissors" && computerSelection == "rock") {
-    return "You lose";
+    console.log("You lose");
+    ++computerScore;
   } else if (playerSelection == "scissors" && computerSelection == "paper") {
-    return "You win";
+    console.log("You win");
+    ++playerScore;
   } else if (playerSelection == "paper" && computerSelection == "scissors") {
-    return "You lose";
+    console.log("You lose");
+    ++computerScore;
   } else if (playerSelection == "paper" && computerSelection == "rock") {
-    return "You win";
+    console.log("You win");
+    ++playerScore;
   } else if (playerSelection == computerSelection) {
-    return "It's a tie";
+    console.log("It's a tie");
   } else {
-    return wrongSelection();
+    return console.log(wrongSelection());
   }
 }
 
-console.log(playerSelection);
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function wrongSelection(playerSelection) {
+  if ((playerSelection != "rock", "paper", "scissors")) return "try again";
+}
+
+// console.log(playerSelection);
+// console.log(computerSelection);
+
+// console.log(playRound(playerSelection, computerSelection));
 
 // log result via a text prompt stating either "you win", "you lose", or "tie"
 
@@ -65,7 +77,18 @@ console.log(playRound(playerSelection, computerSelection));
 // Give player a means to repeat playRound
 // When either player or computer reaches 5 consecutive wins
 // Prompt "game over. try again."
+function game() {
+  for (let i = 1; i <= 5; i++) {
+    playerSelection = prompt("Rock, paper, scissors, shoot!").toLowerCase();
+    console.log(`You choose ${playerSelection}`);
+    computerSelection = getComputerChoice();
+    console.log(`Computer chooses ${computerSelection}`);
+    console.log(playRound(playerSelection, computerSelection));
+    console.log(`The score is ${playerScore} to ${computerScore}`);
+  }
+}
 
+game();
 // log the total games lost and won for the player and the computer
 // If player reaches a total of five wins, print text "you won" and display a button to restart
 // If computer reaches a total of five wins, print text "you lost" and display a button to restart
