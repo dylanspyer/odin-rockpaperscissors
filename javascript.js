@@ -7,62 +7,49 @@ function getComputerChoice() {
   return randomChoice;
 }
 
-// User chooses one of the three choices by clicking one or typing one
-// Prompt asks user to choose rock, paper, or scissors
-// If typing, throw error to user if they do not input one of the choices, not case sensitive
+const playerText = document.querySelector(".playerText");
+const computerText = document.querySelector(".computerText");
+const resultText = document.querySelector(".resultText");
+const choiceButton = document.querySelectorAll(".choiceButton");
 
-// const playerSelectionPrompt = prompt("Rock, paper, scissors");
-// const playerSelection = playerSelectionPrompt.toLowerCase();
+choiceButton.forEach((button) =>
+  button.addEventListener("click", () => {
+    playerSelection = button.textContent.toLowerCase();
+    computerSelection = getComputerChoice();
+    playerText.textContent = `Player: ${playerSelection}`;
+    computerText.textContent = `Computer: ${computerSelection}`;
+    resultText.textContent = `Result: ${playRound(
+      playerSelection,
+      computerSelection
+    )}`;
+  })
+);
 
-// const computerSelection = getComputerChoice();
-// const playerSelection = prompt("Rock, paper, scissors, shoot").toLowerCase();
-
-// If player types something else, throw an error
-
-// Results are determined as follows:
-
-// if player chooses rock and computer chooses rock, tie
-// if player chooses rock and computer chooses paper, lose
-// if player chooses rock and computer chooses scissors, win
-
-// if player chooses paper and computer chooses paper, tie
-// if player chooses paper and computer chooses scissors, lose
-// if player chooses paper and computer chooses rock, win
-
-// if player chooses scissors and computer chooses scissors, tie
-// if player chooses scissors and computer chooses rock, lose
-// if player chooses scissors and computer chooses paper, win
-let playerScore = 0;
 let computerScore = 0;
+let playerScore = 0;
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == "rock" && computerSelection == "paper") {
-    ++computerScore;
-    console.log("You lose");
+    return "You lose";
+    computerScore++;
   } else if (playerSelection == "rock" && computerSelection == "scissors") {
-    console.log("You win");
-    ++playerScore;
+    return "You win";
+    playerScore++;
   } else if (playerSelection == "scissors" && computerSelection == "rock") {
-    console.log("You lose");
-    ++computerScore;
+    return "You lose";
+    computerScore++;
   } else if (playerSelection == "scissors" && computerSelection == "paper") {
-    console.log("You win");
-    ++playerScore;
+    return "You win";
+    playerScore++;
   } else if (playerSelection == "paper" && computerSelection == "scissors") {
-    console.log("You lose");
-    ++computerScore;
+    return "You lose";
+    computerScore++;
   } else if (playerSelection == "paper" && computerSelection == "rock") {
-    console.log("You win");
-    ++playerScore;
-  } else if (playerSelection == computerSelection) {
-    console.log("It's a tie");
+    return "You win";
+    playerScore++;
   } else {
-    return console.log(wrongSelection());
+    return "It's a tie";
   }
-}
-
-function wrongSelection(playerSelection) {
-  if ((playerSelection != "rock", "paper", "scissors")) return "try again";
 }
 
 // console.log(playerSelection);
@@ -77,24 +64,24 @@ function wrongSelection(playerSelection) {
 // Give player a means to repeat playRound
 // When either player or computer reaches 5 consecutive wins
 // Prompt "game over. try again."
-function game() {
-  for (let i = 1; i <= Infinity; i++) {
-    playerSelection = prompt("Rock, paper, scissors, shoot!").toLowerCase();
-    computerSelection = getComputerChoice();
-    console.log(`You choose ${playerSelection}`);
-    console.log(`Computer chooses ${computerSelection}`);
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(`The score is ${playerScore} to ${computerScore}`);
-    if (playerScore == 5) {
-      return console.log("you won the series");
-    }
-    if (computerScore == 5) {
-      return console.log("you lost the series");
-    }
-  }
-}
+// function game() {
+//   for (let i = 1; i <= Infinity; i++) {
+//     playerSelection = prompt("Rock, paper, scissors, shoot!").toLowerCase();
+//     computerSelection = getComputerChoice();
+//     console.log(`You choose ${playerSelection}`);
+//     console.log(`Computer chooses ${computerSelection}`);
+//     console.log(playRound(playerSelection, computerSelection));
+//     console.log(`The score is ${playerScore} to ${computerScore}`);
+//     if (playerScore == 5) {
+//       return console.log("you won the series");
+//     }
+//     if (computerScore == 5) {
+//       return console.log("you lost the series");
+//     }
+//   }
+// }
 
-game();
+// game();
 // log the total games lost and won for the player and the computer
 // If player reaches a total of five wins, print text "you won" and display a button to restart
 // If computer reaches a total of five wins, print text "you lost" and display a button to restart
